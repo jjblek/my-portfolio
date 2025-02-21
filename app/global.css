@@ -37,7 +37,21 @@
 html {
   min-width: 360px;
 }
-
+/* Reset inline <code> styles to remove Shiki classes */
+p code {
+  all: unset;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  @apply whitespace-nowrap
+}
+p code:before {
+  display: none;
+}
+p code:after {
+  display: none;
+}
 .prose {
   @apply text-[#000000] dark:text-[#FFFFFF];
 }
@@ -85,7 +99,11 @@ html {
   border: initial;
   line-height: 1.5;
 }
-
+.prose pre code span {
+  display: inline !important;
+  margin: 0;
+  padding: 0;
+}
 .prose code span {
   @apply font-medium;
 }
@@ -148,4 +166,39 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+/* custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-neutral-200;
+  border-radius: 9999px; /* Rounded track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-neutral-300;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-400;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-neutral-800;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-neutral-700;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-600;
+}
+
+.transition-all {
+  transition: all 0.3s ease-in-out;
 }
