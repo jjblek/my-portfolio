@@ -29,13 +29,6 @@ export const projects: Project[] = [
     tags: ["React", "MUI", "PWA"],
   },
   {
-    title: "E-commerce",
-    year: 2023,
-    description: "Web store built with React, Stripe and Firebase",
-    url: "https://github.com/jjblek/e-commerce",
-    tags: ["React", "Stripe", "Firebase"],
-  },
-  {
     title: "Pentago",
     year: 2022,
     description: "The classic board game, Pentago",
@@ -48,6 +41,13 @@ export const projects: Project[] = [
     description: "The word-guessing game, Wordle",
     url: "https://jjblek.github.io/wordle-clone/",
     tags: ["React"],
+  },
+  {
+    title: "E-commerce",
+    year: 2021,
+    description: "Web store built with React, Stripe and Firebase",
+    url: "https://github.com/jjblek/e-commerce",
+    tags: ["React", "Stripe", "Firebase"],
   },
   {
     title: "DFA Minimization",

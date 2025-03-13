@@ -46,10 +46,10 @@ p code {
   font-family: monospace;
   @apply whitespace-nowrap
 }
-p code:before {
+code:before {
   display: none;
 }
-p code:after {
+code:after {
   display: none;
 }
 .prose {

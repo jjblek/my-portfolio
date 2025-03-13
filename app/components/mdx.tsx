@@ -30,7 +30,19 @@ function RoundedImage(props) {
 }
 
 function Code({ children, ...props }) {
-  let codeHTML = highlight(children);
+  // Check if the code is inline
+  if (typeof children === "string" && !/\n/.test(children)) {
+    return (
+      <code className="bg-[#F7F7F7] dark:bg-[#181818] px-1 rounded">
+        {children.replace(/^`|`$/g, "")}
+      </code>
+    );
+  }
+
+  // Remove backticks from block-level code before highlighting
+  let cleanedCode = typeof children === "string" ? children.replace(/^```[\w]*\n?|```$/g, "") : children;
+  let codeHTML = highlight(cleanedCode);
+
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
