@@ -8,18 +8,25 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "DFA Flow",
+    year: 2024,
+    description: "Interactive DFA Visualizer/Editor/Minimizer",
+    url: "https://dfa-flow.vercel.app/",
+    tags: ["Next.js", "Tailwind", "Python", "AWS Lambda", "Docker", "CI/CD"],
+  },
+  {
     title: "ClimateForge",
     year: 2024,
-    description: "Landing page for a climate tech company",
+    description: "Landing page for ClimateForge.ai",
     url: "https://www.climateforge.ai/",
-    tags: ["Next.js", "Tailwind CSS"],
+    tags: ["Next.js", "Tailwind"],
   },
   {
     title: "CHAT470",
     year: 2023,
     description: "Capstone project — Discord clone with AI chatbot",
     url: "https://www.youtube.com/watch?v=pVIfunDXPds&ab_channel=SSUComputerScienceDepartment",
-    tags: ["MERN", "WebSocket", "WebRTC", "OpenAI"],
+    tags: ["React", "MongoDB", "WebSocket", "WebRTC", "PWA"],
   },
   {
     title: "NeonType",
@@ -54,7 +61,7 @@ export const projects: Project[] = [
     year: 2023,
     description: "An algorithm to minimize a DFA",
     url: "https://github.com/jjblek/DFA-minimization",
-    tags: ["C++", "Algorithms"],
+    tags: ["C++", "CMake"],
   },
   {
     title: "Social Network",

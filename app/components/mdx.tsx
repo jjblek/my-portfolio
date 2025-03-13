@@ -9,6 +9,8 @@ import { ImageGrid } from "./image-grid";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
+import { MdCode } from "react-icons/md";
+import { MdPlayArrow } from "react-icons/md";
 
 function CustomLink(props) {
   let href = props.href;
@@ -111,6 +113,42 @@ function createHeading(level) {
   return Heading;
 }
 
+// 🔹 Source Code Button Component
+function SourceCodeButton({ sourceUrl, demoUrl }) {
+  return (
+    <div className="flex gap-4">
+    <a
+      href={sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-2 text-sm font-medium rounded-md transition no-underline
+      bg-gray-200 dark:bg-neutral-800 text-gray-900 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+    >
+      <button className="flex items-center justify-center gap-2 px-4 py-2">
+      <MdCode className="w-5 h-5" />
+      Source
+      </button>
+    </a>
+    {demoUrl ? 
+      <a
+        href={demoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center text-sm font-medium rounded-md transition 
+        bg-blue-500 text-white hover:bg-blue-600 no-underline"
+      >
+        <button className="flex items-center justify-center gap-1 pl-3 pr-4 py-2">
+        <MdPlayArrow className="w-5 h-5" />
+          Demo
+        </button>
+      </a> 
+    : null}
+  </div>
+  );
+}
+
+
+
 let components = {
   h1: createHeading(1),
   h2: createHeading(2),
@@ -127,6 +165,8 @@ let components = {
   Table,
   del: Strikethrough,
   Callout,
+  SourceCodeButton, // 🔹 Register the Source Code Button
+
 };
 
 export function CustomMDX(props) {

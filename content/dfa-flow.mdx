@@ -1,11 +1,25 @@
 ---
-title: DFA Flow: An Interactive DFA Minimizer/Editor
+title: DFA Flow: An Interactive DFA Visualizer and Minimizer
 publishedAt: 2025-03-12
 summary: A web application that allows users to construct, visualize, and minimize DFAs interactively.
 tags: Next.JS, Python, AWS, CI/CD, Automata Theory
 ---
 
-## **Introduction**
+<SourceCodeButton sourceUrl={'https://github.com/jjblek/dfa-minimizer'} demoUrl={'https://dfa-flow.vercel.app/'}/>
+
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Understanding DFA Minimization](#understanding-dfa-minimization)
+3. [Tech Stack Overview](#tech-stack-overview)
+4. [Frontend](#frontend)
+5. [Backend](#backend)
+6. [CI/CD](#ci-cd)
+7. [Conclusion](#conclusion)
+
+---
+
+<a name="introduction"></a>
+## Introduction
 
 Finite state machines are a fundamental concept in computer science, widely used in automata theory, compiler design, and digital logic. 
 One of the key challenges when working with Deterministic Finite Automata (DFA) is minimizing them—reducing the number of states while preserving functionality. 
@@ -18,7 +32,8 @@ Whether you're interested in automata theory, full-stack development, or serverl
 
 ---
 
-## **Understanding DFA Minimization**
+<a name="understanding-dfa-minimization"></a>
+## Understanding DFA Minimization
 
 A DFA is formally defined as a 5-tuple:
 
@@ -92,23 +107,24 @@ This minimization reduces redundant states while preserving the DFA's language.
 
 ---
 
-## **Tech Stack Overview**
+<a name="tech-stack-overview"></a>
+## Tech Stack Overview
 
 DFA Flow is built using a combination of modern web technologies to provide an intuitive and interactive experience for users. 
 The stack is designed to balance performance, scalability, and ease of development. 
 Here's a breakdown of the key technologies used:
 
-### **Frontend: Next.js, Tailwind CSS, and React Flow**
+### Frontend: Next.js, Tailwind CSS, and React Flow
     - [Next.js](https://nextjs.org/) – Chosen for its server-side rendering (SSR) and static site generation (SSG) capabilities, Next.js provides a smooth user experience while keeping the app performant.
     - [Tailwind CSS](https://tailwindcss.com/) – A utility-first CSS framework that makes styling efficient and maintainable, ensuring a clean and responsive design.
     - [React Flow](https://reactflow.dev/) – A powerful library for building interactive flow-based interfaces, making it easy for users to construct and visualize DFA state diagrams.
 
-### **Backend: Flask-based API on AWS Lambda**
+### Backend: Flask-based API on AWS Lambda
     - [Flask](https://flask.palletsprojects.com/en/stable/) – A lightweight Python web framework that powers the DFA minimization API, handling user requests and computing the minimized DFA.
     - [AWS Lambda](https://aws.amazon.com/lambda/) – The API is deployed as a serverless function, allowing it to scale automatically without managing infrastructure.
     - [Zappa](https://github.com/zappa/Zappa) – Simplifies the deployment of Flask applications to AWS Lambda, enabling a cost-effective, highly scalable, and low-maintenance solution.
 
-### **CI/CD and Deployment: Docker, GitHub Actions, and AWS**
+### CI/CD and Deployment: Docker, GitHub Actions, and AWS
     - [GitHub Actions](https://github.com/features/actions) – Automates the CI/CD pipeline, ensuring that code changes are tested and deployed seamlessly.
     - [Docker](https://www.docker.com/) – Used for containerizing the backend API, making it easier to test and deploy in different environments.
     - [Amazon EC2](https://aws.amazon.com/ec2/) – Used alongside AWS Lambda to manage additional deployment processes as needed.
@@ -117,6 +133,7 @@ By leveraging this stack, DFA Flow offers a seamless and interactive learning ex
 
 ---
 
+<a name="frontend"></a>
 ## The Frontend: Interactive DFA Visualization with Next.js
 
 The frontend of DFA Flow is designed to provide an intuitive and customizable experience for users constructing and minimizing DFAs. 
@@ -142,7 +159,8 @@ Built using Next.js, Tailwind CSS, and React Flow, the UI ensures smooth interac
 
 ---
 
-## **The Minimizer API: Flask-Powered DFA Reduction**
+<a name="backend"></a>
+## The Minimizer API: Flask-Powered DFA Reduction
 
 At the heart of DFA Flow is the Minimizer API, a Flask-based backend service that processes user-submitted DFAs and returns their minimized versions. 
 This API implements **Hopcroft's Algorithm**, an efficient state minimization technique, along with preprocessing steps to remove unreachable and dead states. 
@@ -181,6 +199,7 @@ By using Flask, AWS Lambda, and Zappa, DFA Flow ensures an efficient, scalable, 
 
 ---
 
+<a name="ci-cd"></a>
 ## CI/CD Pipeline: Automating Deployment for Frontend and Backend
 
 To ensure a smooth and automated deployment process, DFA Flow utilizes a CI/CD pipeline for both the frontend and backend. 
@@ -205,19 +224,22 @@ Backend CI/CD Workflow:
 4. Zappa handles deploying the Flask API to AWS Lambda, ensuring automatic scaling and cost efficiency.
 5. Once the deployment is complete, the API is ready to handle new requests without downtime.
 
-### **Conclusion**
+---
 
-[DFA Flow](https://dfa-flow.vercel.app/) was built with the goal of making DFA construction, visualization, and minimization more interactive and accessible. 
+<a name="conclusion"></a>
+### Conclusion
+
+DFA Flow was built with the goal of making DFA construction, visualization, and minimization more interactive and accessible. 
 By leveraging Next.js, React Flow, and Tailwind CSS on the frontend and a Flask-powered AWS Lambda backend, the app provides a seamless learning experience for users exploring automata theory.
 
 The integration of a DFA visualizer, an intuitive editor, and a one-click minimization feature allows users to experiment with state machines dynamically. 
-With a persistent dark/light mode and customizable state colors, [DFA Flow](https://dfa-flow.vercel.app/) also offers a personalized user experience.
+With a persistent dark/light mode and customizable state colors, DFA Flow also offers a personalized user experience.
 
 On the backend, Hopcroft's Algorithm efficiently minimizes DFAs, ensuring optimal performance. 
 The entire deployment process is streamlined using a CI/CD pipeline, with Vercel handling the frontend and GitHub Actions, Docker, and Zappa automating backend updates.
 
 Looking ahead, there are exciting possibilities for future improvements, such as drag-and-drop functionality for more intuitive state manipulation. 
-[DFA Flow](https://dfa-flow.vercel.app/) is not just a tool—it's a learning platform designed to make automata theory more engaging and approachable.
+DFA Flow is not just a tool—it's a learning platform designed to make automata theory more engaging and approachable.
 
 If you're interested in automata theory, full-stack development, or serverless applications, I hope this deep dive provided valuable insights. 
 Give [DFA Flow](https://dfa-flow.vercel.app/) a try, explore its features, and feel free to contribute or suggest enhancements! 🚀

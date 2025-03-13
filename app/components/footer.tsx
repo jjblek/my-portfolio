@@ -13,7 +13,7 @@ const YEAR = new Date().getFullYear();
 
 function SocialLink({ href, icon: Icon }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="transition-opacity duration-300 hover:opacity-80">
       <Icon />
     </a>
   );
@@ -21,7 +21,7 @@ function SocialLink({ href, icon: Icon }) {
 
 function SocialLinks() {
   return (
-    <div className="flex text-lg gap-3.5 float-right transition-opacity duration-300 hover:opacity-90">
+    <div className="flex text-lg gap-3.5 float-right">
       <SocialLink href={socialLinks.github} icon={FaGithub} />
       <SocialLink href={socialLinks.linkedin} icon={FaLinkedinIn} />
       <SocialLink href={socialLinks.email} icon={TbMailFilled} />
@@ -34,7 +34,8 @@ function SocialLinks() {
 
 export default function Footer() {
   return (
-    <small className="block lg:mt-24 mt-16 text-[#1C1C1C] dark:text-[#D4D4D4]">
+    <small className="flex flex-grow items-end justify-between mt-10 pb-10 md:pb-20 text-[#1C1C1C] dark:text-[#D4D4D4]">
+      <div>
       <time>© {YEAR}</time>{" "}
       <a
         className="no-underline"
@@ -44,6 +45,7 @@ export default function Footer() {
       >
         {metaData.name}
       </a>
+      </div>
       <style jsx>{`
         @media screen and (max-width: 480px) {
           article {

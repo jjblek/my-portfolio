@@ -1,0 +1,126 @@
+---
+title: DFA Minimization
+publishedAt: 2023-05-20
+summary: One of my first programming projects. Tic-Tac-Toe programmed in x86-64 assembly language. Over-documented to show a line-by-line understanding.
+tags: C++, Automata Theory
+---
+
+### **Minimizing a DFA Using Hopcroft’s Algorithm**
+
+Deterministic Finite Automata (DFA) minimization is an important step in optimizing state machines, making them more efficient and easier to analyze. The algorithm implemented in our program is **Hopcroft’s algorithm**, one of the fastest known methods for DFA minimization. This article will explain how the program works and analyze its time complexity.
+
+You can find the full implementation here: [GitHub Repository](https://github.com/jjblek/DFA-minimization)
+
+---
+
+## **Understanding DFA Minimization**
+
+A DFA is formally defined as a 5-tuple:
+
+$\ M = (Q, \Sigma, \delta, q_0, F) \ $
+
+where:
+- $( Q )$ is a finite set of states,
+- $( \Sigma )$ is a finite set of input symbols (alphabet),
+- $( \delta: Q \times \Sigma \to Q )$ is the transition function,
+- $( q_0 \in Q )$ is the initial state,
+- $( F \subseteq Q )$ is the set of accepting states.
+
+Minimizing a DFA means reducing the number of states while preserving the accepted language. This involves identifying and merging equivalent states—states that always lead to the same acceptance behavior for any input string.
+
+### Example of DFA Minimization
+
+Consider the following DFA with three states:
+
+```
+Q = { s0, s1, s2 }
+Σ = { a, b }
+F = { s1, s2 }
+δ = {
+    (s0, a) → s2, (s0, b) → s1,
+    (s1, a) → s1, (s1, b) → s2,
+    (s2, a) → s2, (s2, b) → s2,
+}
+```
+
+After minimization, the number of states can be reduced while maintaining the same behavior.
+
+<Image
+    src="/dfa-minimization.svg"
+    alt="OpenGraph image"
+    width={640}
+    height={500}
+/>
+
+### Explanation of Minimization Process
+
+In the original DFA:
+
+- States `s1` and `s2` are both accepting states and behave similarly for all inputs.
+- The transitions for s1 and s2 always lead to an accepting state (`s2` loops on itself, and `s1` transitions to `s2` on `b`).
+
+Using Hopcroft's algorithm:
+
+1. Initial Partitioning: The states are split into accepting `{s1, s2}` and non-accepting `{s0}` groups.
+
+2. Refining the Partition:
+
+    - Since `s1` and `s2` lead to the same states on all inputs, they are merged into a single state.
+
+3. Resulting DFA:
+
+    - The new DFA has `{s0, s1}` as states, with `s1` being the only accepting state.
+
+    - Transitions now map both `a` and `b` from `s0` to `s1`, and `s1` remains in itself for all inputs.
+
+```
+Q = { s0, s1 }
+Σ = { a, b }
+F = { s1 }
+δ = {
+    (s0, a) → s1, (s0, b) → s1,
+    (s1, a) → s1, (s1, b) → s1,
+}
+```
+
+This minimization reduces redundant states while preserving the DFA's language.
+
+---
+
+### **How the Program Works**
+
+The program follows a structured approach to minimize a given DFA:
+
+1. **Removing Unreachable States**
+    - The program first identifies and removes states that cannot be reached from the initial state. This is done using a breadth-first search (BFS)-like traversal.
+
+2. **Partitioning States Using Hopcroft’s Algorithm**
+    - The states are initially divided into two sets:
+        - Accepting states
+        - Non-accepting states
+    - The algorithm iteratively refines these partitions by checking transitions of states within a partition. If two states in the same partition transition to different partitions on the same input symbol, they are split into separate partitions.
+    - This process continues until no further splits occur, ensuring that only truly equivalent states remain grouped together.
+
+3. **Constructing the Minimized DFA**
+    - Each partition is treated as a single state in the minimized DFA.
+    - A new transition table is built using the refined state groupings.
+    - The minimized DFA retains the same language-recognizing capability as the original DFA but with fewer states.
+
+---
+
+### **Time Complexity Analysis**
+
+Hopcroft’s algorithm is one of the most efficient DFA minimization algorithms, running in **O(n log n)** time, where **n** is the number of states. The breakdown is as follows:
+
+- **Removing Unreachable States**: **O(n + m)**, where **m** is the number of transitions.
+- **Partition Refinement (Hopcroft’s Algorithm)**: **O(n log n)**.
+- **Reconstructing the DFA**: **O(n)**.
+
+Since **O(n log n)** dominates, this is the final complexity of the minimization process, making it highly efficient even for large DFAs.
+
+---
+
+### **Conclusion**
+
+The DFA minimization program effectively reduces the number of states using Hopcroft’s algorithm. By first removing unreachable states and then iteratively refining partitions, it achieves optimal minimization in **O(n log n)** time. This ensures that the minimized DFA is as small as possible while preserving its language-recognition capabilities.
+

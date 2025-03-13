@@ -4,20 +4,24 @@ import Technologies from "./components/home/technologies";
 export default function Page() {
   return (
     <section>
+      <div className="relative flex items-center justify-between mb-8">
+      <h1 className="text-2xl font-medium tracking-tight">
+        About
+      </h1>
       <a href={socialLinks.linkedin} target="_blank">
         <Image
           src="/profile.jpg"
           alt="Profile photo"
-          className="rounded-full bg-gray-100 mt-5 float-right ml-[8px] grayscale hover:grayscale-0"
+          className="rounded-full bg-gray-100 grayscale hover:grayscale-0 absolute right-0 top-0"
           unoptimized
-          width={100}
-          height={100}
+          width={48}
+          height={48}
           priority
         />
       </a>
-      <h1 className="mb-8 text-2xl font-medium tracking-tight">
-        About
-      </h1>
+      </div>
+      
+      
       <div className="prose prose-neutral dark:prose-invert mb-8">
         <p>
         I'm Justin Blechel, a software engineer based in Santa Rosa, California. I have a B.S. in Computer Science from{" "}

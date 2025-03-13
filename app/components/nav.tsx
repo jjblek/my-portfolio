@@ -1,8 +1,8 @@
 "use client"
 import Link from "next/link"
 import { ThemeSwitch } from "./theme-switch";
-import { motion } from "motion/react"// Import motion from framer-motionamer-motion
 import { metaData } from "app/config";
+
 const navItems = {
   "/": { name: "Home" },
   "/blog": { name: "Blog" },
@@ -13,8 +13,8 @@ const navItems = {
 export function Navbar() {
 
   return (
-    <nav className="mb-12 py-5">
-      <div className="flex flex-col md:flex-row md:items-center justify-between">
+    <nav className="mb-6 sm:mb-12 py-5">
+      <div className="flex flex-col md:flex-row items-center justify-between">
       <h1
               className="text-3xl font-semibold tracking-tight"
             >
@@ -25,7 +25,7 @@ export function Navbar() {
             <Link
               key={path}
               href={path}
-              className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
+              className="transition-all hover:text-neutral-700 dark:hover:text-neutral-300 flex align-middle relative"
             >
               {name}
             </Link>
