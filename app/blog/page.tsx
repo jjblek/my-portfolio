@@ -4,11 +4,15 @@ import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 const ITEMS_PER_PAGE = 5;
 
-export default async function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
 
-  const params = await searchParams;
+  const page = (await searchParams).page;
   
-  const currentPage = Number(params.page) || 1;
+  const currentPage = Number(page) || 1;
 
   const allBlogs = getBlogPosts();
   const totalPages = Math.ceil(allBlogs.length / ITEMS_PER_PAGE);
