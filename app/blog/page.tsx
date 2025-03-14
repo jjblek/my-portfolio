@@ -6,9 +6,9 @@ const ITEMS_PER_PAGE = 5;
 
 export default async function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
 
-  const { page } = await searchParams
+  const params = await searchParams;
   
-  const currentPage = Number(page) || 1;
+  const currentPage = Number(params.page) || 1;
 
   const allBlogs = getBlogPosts();
   const totalPages = Math.ceil(allBlogs.length / ITEMS_PER_PAGE);
