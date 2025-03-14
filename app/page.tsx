@@ -11,7 +11,7 @@ export default function Page() {
           About
         </h1>
 
-        <div className="">
+        <div className="mr-6">
         <DownloadResume/>
         </div>
         

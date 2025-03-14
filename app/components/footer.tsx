@@ -34,7 +34,7 @@ function SocialLinks() {
 
 export default function Footer() {
   return (
-    <small className="flex flex-grow items-end justify-between mt-10 pb-10 md:pb-20 text-[#1C1C1C] dark:text-[#D4D4D4]">
+    <small className="flex flex-grow items-end justify-between mt-10 pb-10 lg:pb-20 text-[#1C1C1C] dark:text-[#D4D4D4]">
       <div className="flex gap-1 transition-opacity duration-300 hover:opacity-80">
         <time>© {YEAR}</time>{" "}
         <p
