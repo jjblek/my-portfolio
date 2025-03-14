@@ -15,7 +15,6 @@ export default function Page() {
         <DownloadResume/>
         </div>
         
-        
         <a href={socialLinks.linkedin} target="_blank" className="absolute right-4 bottom-0 circle">
           <Image
             src="/profile.jpg"
@@ -30,7 +29,6 @@ export default function Page() {
         
       </div>
       
-      
       <div className="prose prose-neutral dark:prose-invert mb-8">
         <p>
         I'm Justin Blechel, a software engineer based in Santa Rosa, California. I have a B.S. in Computer Science from{" "}
@@ -42,7 +40,7 @@ export default function Page() {
           </a>
           .
         </p>
-        <p>I love crafting sleek, highly performant web applications. Let's connect and build something together!</p>
+        <p>I specialize in building sleek, high-performance web applications. Let's connect and create something amazing!</p>
       </div>
       
       <Technologies />
