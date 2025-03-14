@@ -10,8 +10,8 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
 import { MdCode } from "react-icons/md";
-import { MdPlayArrow } from "react-icons/md";
-
+import { FiGlobe } from "react-icons/fi";
+import { FaGithub } from "react-icons/fa";
 function CustomLink(props) {
   let href = props.href;
   if (href.startsWith("/")) {
@@ -122,10 +122,10 @@ function SourceCodeButton({ sourceUrl, demoUrl }) {
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center gap-2 text-sm font-medium rounded-md transition no-underline
-      bg-gray-200 dark:bg-neutral-800 text-gray-900 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+      bg-neutral-200 dark:bg-neutral-800 text-gray-900 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700"
     >
       <button className="flex items-center justify-center gap-2 px-4 py-2">
-      <MdCode className="w-5 h-5" />
+      <FaGithub className="" />
       Source
       </button>
     </a>
@@ -135,10 +135,10 @@ function SourceCodeButton({ sourceUrl, demoUrl }) {
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center text-sm font-medium rounded-md transition 
-        bg-blue-500 text-white hover:bg-blue-600 no-underline"
+        bg-blue-400 dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-600 no-underline"
       >
-        <button className="flex items-center justify-center gap-1 pl-3 pr-4 py-2">
-        <MdPlayArrow className="w-5 h-5" />
+        <button className="flex items-center justify-center gap-1 px-4 py-2">
+        <FiGlobe className="" />
           Demo
         </button>
       </a> 

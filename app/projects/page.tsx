@@ -1,7 +1,6 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { projects } from "./project-data";
-import ProjectsList from "../components/projects-list"
+import ProjectsList from "./projects-list"
+
 export const metadata: Metadata = {
   title: "Projects",
   description: "Justin Blechel's Projects",

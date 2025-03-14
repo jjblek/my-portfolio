@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link';
 import { motion } from 'motion/react';
 
 interface TechnologyProps {
@@ -14,7 +15,7 @@ interface TechnologyProps {
 
 const Technology = ({technology, description, imageSrc, color, invert }: TechnologyProps) => {
     return (
-        <motion.div className='flex gap-2 items-center sm:gap-3 w-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-900 dark:hover:bg-neutral-800 p-2 rounded-md hover:shadow-sm'
+        <motion.div className='flex gap-2 items-center sm:gap-3 w-full bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-800 dark:hover:bg-neutral-700 p-2 rounded-md hover:shadow-sm'
         whileHover={{
             scale: [null, 1.06, 1.04],
             transition: {
@@ -42,9 +43,9 @@ const Technology = ({technology, description, imageSrc, color, invert }: Technol
                 />
             </div>
             : null}
-            <div className='cursor-default flex-1 min-w-0'>
+            <div className='cursor-pointer flex-1 min-w-0'>
             <p className='text-xs sm:text-sm whitespace-nowrap overflow-x-hidden text-ellipsis'>{technology}</p>
-            <p className='text-[10px] text-zinc-600 dark:text-gray-200 whitespace-nowrap overflow-x-hidden text-ellipsis'>{description}</p>
+            <p className='text-[10px] text-zinc-700 dark:text-neutral-200 whitespace-nowrap overflow-x-hidden text-ellipsis'>{description}</p>
             </div>
         </motion.div>
     )
@@ -76,7 +77,7 @@ const technologies = [
         color: "#00bcd425"
     },
     {
-        name: "NextJS",
+        name: "Next.js",
         description: "React Framework",
         imageSrc: "/logos/nextjs-logo.png",
         invert: true
@@ -102,33 +103,41 @@ const technologies = [
     {
         name: "MongoDB",
         description: "NoSQL Database",
-        imageSrc: "/logos/mongodb-logo.png",
+        imageSrc: "/logos/mongodb-logo.webp",
         color: "#4faa4125"
     },
 ]
 
 const Technologies = () => {
     return (
-        <div className='flex flex-col'>
-            <div className='flex flex-col gap-4'>
-            <h2 className='text-2xl font-medium tracking-tight'>
-                Core technologies
-            </h2>
-            <p className='prose prose-neutral dark:prose-invert mb-8'>
-                I'm proficient in a variety of modern technologies that enable me to develop efficient and powerful solutions. 
+        <div className="flex flex-col">
+            <div className="flex flex-col gap-4">
+            <h2 className="text-2xl font-medium tracking-tight">Core technologies</h2>
+            <p className="prose prose-neutral dark:prose-invert mb-8">
+                I'm proficient in a variety of modern technologies that enable me to develop efficient and powerful solutions.
                 Here are some of the key technologies I work with.
             </p>
             </div>
-            
-            <div className='grid grid-cols-3 gap-1 sm:gap-2 justify-normal'>
-                {technologies.map((technology, index) => 
-                    <div key={index} className='flex w-full max-w-[170px] sm:max-w-[180px] md:max-w-[200px]'>
-                        <Technology technology={technology.name} description={technology.description} imageSrc={technology.imageSrc} color={technology.color} invert={technology.invert} />
-                    </div>
-                )}
+    
+            <div className="grid grid-cols-3 gap-1 sm:gap-2 justify-normal">
+            {technologies.map((technology, index) => (
+                <Link
+                key={index}
+                href={`/projects?tag=${encodeURIComponent(technology.name)}`}
+                className="flex w-full max-w-[170px] sm:max-w-[180px] md:max-w-[200px]"
+                >
+                <Technology
+                    technology={technology.name}
+                    description={technology.description}
+                    imageSrc={technology.imageSrc}
+                    color={technology.color}
+                    invert={technology.invert}
+                />
+                </Link>
+            ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Technologies
