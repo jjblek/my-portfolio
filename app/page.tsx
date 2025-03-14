@@ -42,7 +42,7 @@ export default function Page() {
           </a>
           .
         </p>
-        <p>I love building minimalistic, highly performant web apps. I'm currently volunteering at ClimateForge.ai as a frontend developer.</p>
+        <p>I love crafting sleek, highly performant web applications. Let's connect and build something together!</p>
       </div>
       
       <Technologies />
