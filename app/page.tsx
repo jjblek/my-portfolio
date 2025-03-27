@@ -12,7 +12,7 @@ export default function Page() {
         <DownloadResume/>
       </div>
       
-      <div className=" mb-8">
+      <div className="prose prose-neutral dark:prose-invert mb-8">
         <p>
         I'm Justin Blechel, a software engineer based in Santa Rosa, California. I have a B.S. in Computer Science from{" "}
           <a className="transition-none hover:transition-all"
