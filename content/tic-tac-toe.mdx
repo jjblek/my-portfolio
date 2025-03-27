@@ -5,6 +5,30 @@ summary: One of my first programming projects. Tic-Tac-Toe programmed in x86-64 
 tags: Assembly Language
 ---
 
+<SourceCodeButton sourceUrl={'https://github.com/jjblek/tic-tac-toe'}/>
+
+## Table of Contents
+1. [Introduction](#introduction)
+2. [ASM Program: Tic-Tac-Toe](#tic-tac-toe)
+    - [Data Section](#data-section)
+    - [BSS Section](#bss-section)
+    - [Code Section](#code-section)
+        - [Macros](#macros)
+        - [Loops](#loops)
+        - [Macro vs. Function](#macro-vs-function)
+    - [Program Logic](#program-logic)
+        - [Game Start](#game-start)
+        - [Round Start](#round-start)
+        - [Input Start](#input-start)
+        - [Placement Start](#placement-start)
+        - [Print New Board](#print-new-board)
+        - [Check win Conditions](#check-win)
+        - [Round End](#round-end)
+        - [Game End](#game-end)
+3. [Conclusion](#conclusion)
+
+---
+
 ## Introduction
 
 Assembly language, often referred to as Assembly and abbreviated as ASM, is any low-level programming language with a very strong correspondence between the instructions in the language and the architecture's machine code instructions.
@@ -31,7 +55,9 @@ Assembly language for the 8086 family provides the mnemonic MOV (an abbreviation
 MOV AL, 61       ; Load AL with 97 (61 in hex)
 ```
 
-Assembly language is considered a low-level language because it provides little to no abstraction from a computer's architecture. Moving a value into a register is further abstracted in higher-level languages such as C++ or Python. For example, the following C++ code initializes an integer value to 97.
+Assembly language is considered a low-level language because it provides little to no abstraction from a computer's architecture. 
+
+Moving a value into a register is further abstracted in higher-level languages. For example, the following C++ code initializes an integer value to 97.
 
 ```cpp
 int value = 97; // Initialize integer value to 97
@@ -44,23 +70,21 @@ If we want to store a value in assembly language it is possible to allocate spac
 initialized         db                  61  ; Define 1 byte
 ```
 
-The above assembly code defines a variable initialized to the hex value of 97 with the `db` (define byte) directive. Variables defined this way would correspond to global or static variables in C++.
+The above assembly code defines a variable initialized to the hex value of 97 with the `db` (define byte) directive. Variables defined this way would correspond to global or static variables in a higher-level language.
 
 However, if we assume the above C++ code is not global, then when compiled into assembly language it would likely result in a `MOV` instruction like the one given above.
 
+---
+
+<a name="tic-tac-toe"></a>
 ## ASM Program: Tic-Tac-Toe
 
+<a name="data-section"></a>
 ### Data Section
 
 The first section of the program is the **data section**. It uses define directives such as `db` to not only allocate space for variables, but to make the rest of the program more human-readable/modifiable.
 
 ```asm
-###############
-; Justin Blechel
-; Project: Tic-Tac-Toe
-; 12/13/20
-; ###############
-
 ; Data Section
 ; ############
 section     .data
@@ -91,8 +115,6 @@ Above, we initialize variables for system calls and redundant data.
 Below, we initialize variables for various prompts and error messages.
 Similar to globals in higher-level languages, defining our symbols and prompts in the data section makes them easy to modify later on.
 
-Note: `db` can define more than one byte. The assembler allocates contiguous memory.
-
 ```asm
 ; start prompt
 title        db "     TIC-TAC-TOE              "
@@ -121,6 +143,11 @@ drawPrompt    db  "Draw!!!         "
 endPromptSize equ $-drawPrompt
 ```
 
+<Callout emoji="💡">
+**Note**: `db` can define more than one byte. The assembler allocates contiguous memory.
+</Callout>
+
+<a name="bss-section"></a>
 ### BSS Section
 
 The next section, called the **bss section** contains declarations of variables that have not yet been assigned a value. In this program, a user inputs a row and column number to place a symbol on the tic-tac-toe board. So, we will reserve space for the user's row and column input using the `resb` directive.
@@ -135,15 +162,17 @@ row resb 1 ; reserve a byte for row input
 col resb 1 ; reserve a byte for column input
 ```
 
+<a name="code-section"></a>
 ### Code Section
 
-Lastly, the text section or **code section** is the portion of the program that contains executable instructions like `MOV`.
+Lastly, the **code section** is the portion of the program that contains executable instructions like `MOV`.
 
+<a name="macros"></a>
 #### Macros
 
 At the beginning of this section we define a re-usable unit of code called a **Macro**. Macros are used to contain tasks or redundant code. They help to simplify logic and management of the source code.
 
-The first macro, {"`print`"} is used to print a specified prompt. It has 2 parameters represented in hexadecimal as `0x2`. The first parameter is the address of a prompt and the second is the size of that prompt.
+The first macro, `print` is used to print a specified prompt. It has 2 parameters represented in hexadecimal as `0x2`. The first parameter is the address of a prompt and the second is the size of that prompt.
 
 ```asm
 ; Code Section
@@ -176,7 +205,7 @@ syscall             ; invoke call to system service
 %endmacro
 ```
 
-The second macro, `printRow` is used to print a row of the tic-tac-toe board given an index. It is used inside of another macro, `printBoard`.
+The second macro, `printRow` is used to print a row of the tic-tac-toe board given an index. It is used inside another macro, `printBoard`.
 
 ```asm
 ; ###############################################
@@ -200,16 +229,14 @@ pop rcx                 ; restore counter
 %endmacro
 ```
 
+<a name="loops"></a>
 #### Loops
 
-The `printBoard` macro prints the tic-tac-toe board one row at a time.
-It is a good example of how to implement a loop in assembly language using labels and jumps. 
+The `printBoard` macro shows how loops in assembly language are created, using labels and jump instructions to print each row of the tic-tac-toe board.
 
 The **label** `%%printRowStart` is the beginning of the loop. The **jump** instruction `jbe %%printRowStart` is the end of the loop.
 
-A jump instruction jumps to a specified label and `JBE` stands for jump-below-equal or jump if less-than or equal. It depends on the result of the compare instruction `CMP RCX, [tttRow]` one line above. The `RCX` register contains the number of rows printed and is compared to the max tic-tac-toe row size of 3. Therefore, `JBE` will jump to the starting label while `RCX` (rows printed) is less than 3.
-
-Note: The `CMP` instruction can be thought of as an `if` statement in C++. A normal `JMP` instruction is unspecified, meaning it does not depend on the result of a `CMP` instruction.
+A jump instruction jumps to a specified label. `JBE` stands for jump-below-equal or jump if less-than or equal. It depends on the result of the compare instruction `CMP RCX, [tttRow]` one line above. The `RCX` register contains the number of rows printed and is compared to the max tic-tac-toe row size of 3. Therefore, `JBE` will jump to the starting label while `RCX` is less than 3.
 
 ```asm
 ; ###############################################
@@ -254,6 +281,10 @@ syscall             ; invoke call to system service
 %endmacro
 ```
 
+<Callout emoji="💡">
+**Note**: The `CMP` instruction can be thought of as an `if` statement. A normal `JMP` instruction is unspecified, meaning it does not depend on the result of a `CMP` instruction.
+</Callout>
+
 The final macro, `checkPlacement` is used to check if an X or O is already placed on a user's row and column input. 
 
 ```asm
@@ -273,18 +304,23 @@ jmp validPlacement  ; else valid placement
 %endmacro
 ```
 
+<a name="macro-vs-function"></a>
 #### Macro vs. Function/Procedure
 
-Note that we jump to a label outside of the macro. While connections can be made between a macro in assembly and a function in C++, it is important to note the distinction between the two. When a macro is called, it simply executes the group of instructions contained inside.
+Note that we jump to a label outside of the macro. While connections can be made between a macro and a function, it is important to note the distinction between the two. When a macro is called, it simply executes the group of instructions contained inside.
 
-A function in C++ corresponds to a procedure in assembly language, not a macro. However, like a function/procedure, a macro improves readability and reduces repetitive code. The advantage is that it does not need a stack or require extra time to call and return.
+Functions in higher-level languages correspond to a procedure in assembly language, not a macro. However, like a function/procedure, a macro improves readability and reduces repetitive code. The advantage is that it does not need a stack or require extra time to call and return.
 
-Note: Macros can be defined in C++ with the `#define` directive. However, functions are often preferred.
+<Callout emoji="💡">
+**Note**: Macros can be defined in C++ with the `#define` directive. However, functions are often preferred.
+</Callout>
 
+<a name="program-logic"></a>
 ### Program Logic
 
-After the macro definitions comes the actual logic of the program, where instructions are executed.
+Following the macro definitions, the program's core logic begins, where the actual instructions are implemented and executed.
 
+<a name="game-start"></a>
 #### Game Start
 
 The first section prints a title and game instructions. It then prints an empty tic-tac-toe board using the `printBoard` macro defined above.
@@ -313,9 +349,10 @@ syscall             ; invoke call to system service
 printBoard          ; print default board
 ```
 
+<a name="round-start"></a>
 #### Round Start
 
-The next section is the start of a tic-tac-toe round. Each round begins by prompting a player to make a placement. The `RCX` register is now used to count the number of rounds and the `roundStart` label represents the start of a round and the program loop. The program essentially loops through each round until a win condition is met.
+The next section represents the start of a tic-tac-toe round. Each round begins by prompting a player to make a placement. The `RCX` register is now used to count the number of rounds and the `roundStart` label represents the start of a round/program loop. The program essentially loops through each round until a win condition is met.
 
 ```asm
 ; ### Round start
@@ -347,9 +384,10 @@ invalidPlacement:             ; jumped from the checkPlacement macro
 continue:
 ```
 
+<a name="input-start"></a>
 #### Input Start
 
-After prompting a user to place a symbol on the board, the program accepts user input and validates it. If the input is invalid, the program will output an error message and return to the `inputStart` label. This section shows how to get and store user input in assembly language.
+This section demonstrates the input handling mechanism in assembly language, where user input for board placement is solicited, captured, and rigorously validated. Invalid inputs trigger error messaging and prompt a re-entry sequence.
 
 ```asm
 ; ### Input start
@@ -403,9 +441,10 @@ jmp inputStart                ; restart input, jump to "inputStart"
 validInput: ; input is valid, placement can start
 ```
 
+<a name="placement-start"></a>
 #### Placement Start
 
-While it is important to check that the input itself is valid, we must also check that it corresponds to a valid placement on the tic-tac-toe board. This section makes use of the `checkPlacement` macro defined above.
+Beyond validating the input format, it's crucial to ensure the selected board location is an available placement. The `checkPlacement` macro provides this validation mechanism.
 
 ```asm
 ; ### Placement start
@@ -442,9 +481,10 @@ validPlacement: ; set valid placement
 mov byte [tttArray + rax], r8b
 ```
 
+<a name="print-new-board"></a>
 #### Print New Board
 
-If a placement is valid the program will print a new board showing the new placement, making use of the `printBoard` macro.
+Making use of the `printBoard` macro, if a placement is valid the program will print a new board showing the new placement.
 
 ```asm
 ; ### Print new board
@@ -460,6 +500,7 @@ push rcx      ; save counter
 
 After printing a new board the program checks the round counter. A player must place three symbols to win the game, so it is impossible to win until at least round five. Therefore we can skip checking win conditions until round five.
 
+<a name="check-win"></a>
 #### Check Win Conditions
 
 The following section checks if a win condition has been met. If a win condition has been met the program will break from the loop. To break from the loop we can simply jump to a label outside of the loop. In this case we jump to the `win` label at the end of the program.
@@ -515,6 +556,7 @@ je checkDiag2     ; restart: check next diagonal positon
 ; else no win conditions found
 ```
 
+<a name="round-end"></a>
 #### Round End
 
 If no win conditions are found and the board is full (ninth round), then the current game has resulted in a draw. The program will break from the loop by jumping to the `draw` label at the end of the program. Else the round has ended and no win/draw conditions were found, so start a new round by jumping to the `roundStart` label.
@@ -530,6 +572,7 @@ nextRound:      ; else
 jmp roundStart  ; start next round
 ```
 
+<a name="game-end"></a>
 #### Game End
 
 The game will end when a win or draw condition is met. The program outputs a message indicating the result and exits.
@@ -562,3 +605,22 @@ exit:
     mov rdi, exit_success ; output location = 0x0
     syscall
 ```
+---
+
+<a name="conclusion"></a>
+## Conclusion: The Beauty of Low-Level Programming
+
+The journey through this Tic-Tac-Toe implementation in assembly language reveals the intricate world of low-level programming. While higher-level languages abstract away the complexities of computer architecture, assembly language provides a raw, unfiltered view of how computers truly execute instructions.
+
+This implementation demonstrates several key aspects of assembly programming:
+
+- The direct manipulation of system resources through syscalls
+- Precise control over register usage and memory allocation
+- Creative use of macros to simplify repetitive code
+- Implementing complex logic through low-level instructions and jumps
+
+Beyond its technical complexity, this example showcases the fundamental principles of programming: breaking down a problem into smaller, manageable components. From managing game state to checking win conditions, each section of the code represents a carefully crafted solution that communicates directly with the computer's hardware.
+
+For aspiring programmers and computer science enthusiasts, diving into assembly language provides a deeper understanding of how software truly interacts with hardware. It's a reminder that behind every high-level abstraction lies a intricate dance of bytes, registers, and precise instructions.
+
+While we may not write entire applications in assembly today, understanding its principles can make us more thoughtful, efficient programmers across all languages and platforms.

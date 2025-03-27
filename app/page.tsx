@@ -11,22 +11,7 @@ export default function Page() {
           About
         </h1>
 
-        <div className="mr-6">
         <DownloadResume/>
-        </div>
-        
-        <a href={socialLinks.linkedin} target="_blank" className="absolute right-4 bottom-0 circle">
-          <Image
-            src="/profile.jpg"
-            alt="Profile photo"
-            className=" bg-gray-100 grayscale hover:grayscale-0"
-            unoptimized
-            width={64}
-            height={64}
-            priority
-          />
-        </a>
-        
       </div>
       
       <div className="prose prose-neutral dark:prose-invert mb-8">
