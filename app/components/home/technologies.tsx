@@ -124,7 +124,7 @@ const Technologies = () => {
                 <Link
                 key={index}
                 href={`/projects?tag=${encodeURIComponent(technology.name)}`}
-                className="flex w-full max-w-[170px] sm:max-w-[180px] md:max-w-[200px]"
+                className="flex w-full max-w-[170px] sm:max-w-[180px] md:max-w-[205px]"
                 >
                 <Technology
                     technology={technology.name}
