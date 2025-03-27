@@ -41,18 +41,18 @@ export const projects: Project[] = [
     hiddenTags: ["Git"]
   },
   {
-    title: "Pentago",
-    year: 2022,
-    description: "The classic board game, Pentago",
-    url: "https://jjblek.github.io/pentago/",
-    tags: ["React", "MUI"],
-    hiddenTags: ["Git"]
-  },
-  {
     title: "Wordle Clone",
     year: 2023,
     description: "The word-guessing game, Wordle",
     url: "https://jjblek.github.io/wordle-clone/",
+    tags: ["React", "MUI"],
+    hiddenTags: ["Git"]
+  },
+  {
+    title: "Pentago",
+    year: 2022,
+    description: "The classic board game, Pentago",
+    url: "https://jjblek.github.io/pentago/",
     tags: ["React", "MUI"],
     hiddenTags: ["Git"]
   },
