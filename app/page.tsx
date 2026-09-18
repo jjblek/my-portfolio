@@ -14,16 +14,15 @@ export default function Page() {
       
       <div className="prose prose-neutral dark:prose-invert mb-8">
         <p>
-        I'm Justin Blechel, a software engineer based in Santa Rosa, California. I have a B.S. in Computer Science from{" "}
+        I'm Justin Blechel, a Computer Science graduate from{" "}
           <a className="transition-none hover:transition-all"
             target="_blank"
             href="https://www.sonoma.edu/"
           >
           Sonoma State University
           </a>
-          .
+          . I have hands-on experience in full stack web development and I'm currently looking for new opportunities in software engineering.
         </p>
-        <p>I specialize in building sleek, high-performance web applications. Let's connect and create something amazing!</p>
       </div>
       
       <Technologies />

@@ -114,8 +114,7 @@ const Technologies = () => {
             <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-medium tracking-tight">Core technologies</h2>
             <p className="prose prose-neutral dark:prose-invert mb-8">
-                I'm proficient in a variety of modern technologies that enable me to develop efficient and powerful solutions.
-                Here are some of the key technologies I work with.
+                These are some of the technologies I'm most proficient in. Click any to see related projects.
             </p>
             </div>
     
